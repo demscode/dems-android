@@ -1,7 +1,6 @@
 language: android
 
-before_script: chmod 755 dems
-cd dems
+before_script: sudo cd dems
 
 android:
   components:
