@@ -8,6 +8,12 @@ import android.test.ApplicationTestCase;
  */
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
-        super(Application.class);
+       super(Application.class);
+    }
+
+    public void test() throws Exception {
+        final int expected = 1;
+        final int reality = 5;
+        assertEquals(expected, reality);
     }
 }
