@@ -1,6 +1,6 @@
 language: android
 
-before_script: cd dems
+before_script: chmod cd dems
 
 android:
   components:
