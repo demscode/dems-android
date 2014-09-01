@@ -1,0 +1,8 @@
+language: android
+android:
+  components:
+    - build-tools-19.1.0
+    - android-16
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-19
