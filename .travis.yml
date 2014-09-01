@@ -1,4 +1,7 @@
 language: android
+
+before-script: chmod +x ./gradlew
+
 android:
   components:
     - build-tools-19.1.0
