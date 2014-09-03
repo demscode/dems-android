@@ -5,15 +5,32 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MyActivity extends Activity {
+    GPS gps;
+    GoogleMap map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
-    }
 
+        gps = new GPS(MyActivity.this);
+        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+        if (gps.canGetLocation()) {
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            LatLng position = new LatLng(latitude, longitude);
+            CameraUpdate update = CameraUpdateFactory.newLatLng( position );
+            map.animateCamera( update );
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
