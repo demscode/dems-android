@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
+    tools:context="swampthings.dems.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -21,51 +21,61 @@
 
     <ScrollView
         android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:background="#ffffff">
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/plus_sign_in_button"
-                android:layout_width="match_parent"
+            <!--  Header  Starts-->
+            <LinearLayout android:id="@+id/header"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"/>
-
-            <LinearLayout
-                android:id="@+id/plus_sign_out_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:weightSum="2">
-
-                <Button
-                    android:id="@+id/plus_sign_out_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/plus_sign_out"/>
-
-                <Button
-                    android:id="@+id/plus_disconnect_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/plus_disconnect"/>
-
+                android:background="@android:color/holo_blue_bright"
+                android:paddingTop="5dip"
+                android:paddingBottom="60dip"
+                android:orientation="horizontal">
             </LinearLayout>
+            <!--  Header Ends -->
 
+            <!-- Footer Start -->
+            <LinearLayout android:id="@+id/footer"
+                android:layout_width="fill_parent"
+                android:layout_height="90dip"
+                android:background="@android:color/holo_blue_bright"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+            </LinearLayout>
+            <!-- Footer Ends -->
+
+            <!-- Login Form Starts -->
             <LinearLayout
-                android:id="@+id/email_login_form"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                android:padding="10dip"
+                android:layout_below="@id/header">
+                <!-- First Name Entry -->
+                <EditText
+                    android:id="@+id/fName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_fname"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+                <!-- Last Name Entry -->
+                <EditText
+                    android:id="@+id/lName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_lname"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"/>
+                <!-- Email Entry -->
                 <AutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
@@ -74,7 +84,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"/>
-
+                <!-- Password Entry -->
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
@@ -93,11 +103,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_in"
+                    android:text="@string/action_sign_in_short"
                     android:textStyle="bold"/>
 
             </LinearLayout>
-        </LinearLayout>
+            <!-- Login Form Ends -->
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>
