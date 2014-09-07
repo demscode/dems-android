@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/header"
-        android:text="Location"
+        android:text="Longitude\nLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -27,9 +27,9 @@
         android:layout_height="wrap_content"
         android:text="Locate Me!"
         android:id="@+id/button"
-        android:layout_alignTop="@+id/header"
-        android:layout_alignRight="@+id/map"
-        android:layout_alignEnd="@+id/map"
-        android:onClick="locate_onClick" />
+        android:onClick="locate_onClick"
+        android:layout_alignBottom="@+id/header"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

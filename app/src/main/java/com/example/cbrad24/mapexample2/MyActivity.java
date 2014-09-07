@@ -1,7 +1,6 @@
 package com.example.cbrad24.mapexample2;
 
 import android.app.Activity;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,8 +37,18 @@ public class MyActivity extends Activity {
             patient = map.addMarker(new MarkerOptions().position(position).title("Patient"));
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 16);
             map.animateCamera( update );
-            loctxt.setText( "Latitude:" +  latitude  + ", Longitude:"+ longitude );
+            loctxt.setText( "Latitude:\t\t" +  latitude  + "\nLongitude:\t"+ longitude );
+        } else {
+            gps.showSettingsAlert();
         }
+    }
+
+    public void onLocationUpdate() {
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
+        LatLng position = new LatLng(latitude, longitude);
+        patient.setPosition(position);
+        loctxt.setText( "Latitude:\t\t" +  latitude  + "\nLongitude:\t"+ longitude );
     }
 
     public void locate_onClick(View v) {
@@ -50,7 +59,7 @@ public class MyActivity extends Activity {
         patient.setPosition(position);
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 16);
         map.animateCamera( update );
-        loctxt.setText( "Latitude:" +  latitude  + ", Longitude:"+ longitude );
+        loctxt.setText( "Latitude:\t\t" +  latitude  + "\nLongitude:\t"+ longitude );
     }
 
     @Override
