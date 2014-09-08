@@ -60,6 +60,8 @@ public class MyActivity extends Activity {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 16);
         map.animateCamera( update );
         loctxt.setText( "Latitude:\t\t" +  latitude  + "\nLongitude:\t"+ longitude );
+
+        new Restful().execute(latitude, longitude);
     }
 
     @Override

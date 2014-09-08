@@ -1,36 +1,52 @@
 package com.example.cbrad24.mapexample2;
 
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import android.os.AsyncTask;
 
-import java.io.InputStreamReader;
-import java.io.Reader;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Cbrad24 on 7/09/2014.
  */
-public class Restful {
+public class Restful extends AsyncTask<Double, Void, Void> {
 
-    public void sendLocation() {
-        String urlToSendRequest = "https://example.net";
-        String targetDomain = "example.net";
+    @Override
+    protected Void doInBackground(Double... doubles) {
+        try {
+            int count = doubles.length;
 
-        DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpHost targetHost = new HttpHost(targetDomain, 80, "http");
+            // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://httpbin.org/");
 
-        HttpPost httpPost = new HttpPost(urlToSendRequest);
+            // Add your data
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("lat", Double.toString(doubles[0])));
+            nameValuePairs.add(new BasicNameValuePair("long", Double.toString(doubles[1])));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-        httpPost.addHeader("Content-Type", "application/xml");
+            // Execute HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
 
-        StringEntity entity = new StringEntity("<input>test</input>", "UTF-8");
-        entity.setContentType("application/xml");
-        httpPost.setEntity(entity);
+        } catch (ClientProtocolException e) {
+            // TODO Auto-generated catch block
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+        }
+        return null;
+    }
 
-        HttpResponse response = httpClient.execute(targetHost, httpPost);
+    protected void onPostExecute() {
 
-        Reader r = new InputStreamReader(response.getEntity().getContent());
     }
 }
