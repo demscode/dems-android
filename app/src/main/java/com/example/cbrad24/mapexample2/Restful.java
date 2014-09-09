@@ -27,7 +27,7 @@ public class Restful extends AsyncTask<Double, Void, Void> {
 
             // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://httpbin.org/");
+            HttpPost httppost = new HttpPost("http://demsweb.herokuapp.com/api/patient/1/locations");
 
             // Add your data
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
