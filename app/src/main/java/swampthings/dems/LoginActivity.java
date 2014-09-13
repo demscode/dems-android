@@ -3,6 +3,8 @@ package swampthings.dems;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,6 +14,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
 
 
 /**
@@ -28,6 +37,7 @@ public class LoginActivity extends Activity implements
     private boolean intentInProgress;
     private boolean signInClicked;
     private ConnectionResult connectionResult;
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
 
 
     private void resolveSignInErrors() {
@@ -81,31 +91,32 @@ public class LoginActivity extends Activity implements
         // We've resolved any connection errors.  googleApiClient can be used to
         // access Google APIs on behalf of the user.
         signInClicked = false;
+        Person currentPerson = Plus.PeopleApi.getCurrentPerson(googleApiClient);
+        String email = Plus.AccountApi.getAccountName(googleApiClient);
 
-        // Go to HomeActivity upon successful sign in
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        String id = currentPerson.getId();
+        String name = currentPerson.getDisplayName();
+        JSONObject profile = new JSONObject();
+
+        try {
+
+            profile.put("id", id);
+            profile.put("name", name);
+            profile.put("email", email);
+
+        } catch (Exception e) {
+            //error
+        }
+
+        new CheckAccountExists().execute(profile);
+
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {
         googleApiClient.connect();
     }
-
-    /*@Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        if (!intentInProgress && connectionResult.hasResolution()) {
-            try {
-                intentInProgress = true;
-                startIntentSenderForResult(connectionResult.getResolution().getIntentSender(), RC_SIGN_IN, null, 0,0,0);
-            } catch (IntentSender.SendIntentException e) {
-                // The intent was canceled before it was sent.  Return to the default
-                // state and attempt to connect to get an updated ConnectionResult.
-                intentInProgress = false;
-                googleApiClient.connect();
-            }
-        }
-    }*/
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
@@ -149,6 +160,91 @@ public class LoginActivity extends Activity implements
         }
     }
 
+    protected class CheckAccountExists extends AsyncTask<JSONObject, Integer, String> {
+
+        @Override
+        protected String doInBackground(JSONObject... params) {
+            String id = "";
+            try {
+                id = params[0].getString("id");
+            } catch (Exception e) {
+                //id not defined
+            }
+
+            if (CheckPatientExists(id)) {
+                return id;
+            } else {
+                CreateNewAccount(params[0]);
+            }
+
+            return id;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+
+        }
+
+
+        private boolean CheckPatientExists(String id) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpGet request = new HttpGet(patientAPIURL + id);
+            HttpResponse response;
+            boolean exists = false;
+
+            try {
+                response = httpClient.execute(request);
+
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    exists = true;
+                }
+
+
+            } catch (Exception e) {
+                exists = false;
+            } finally {
+                httpClient.close();
+            }
+
+            return exists;
+        }
+
+        private boolean CreateNewAccount(JSONObject profile) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpPost request = new HttpPost(patientAPIURL);
+            HttpResponse response;
+            boolean success = false;
+
+            try {
+
+                StringEntity stringEntity = new StringEntity(profile.toString());
+
+                request.setEntity(stringEntity);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+                }
+
+
+
+            } catch (Exception e) {
+                success =  false;
+            } finally {
+                httpClient.close();
+            }
+
+            return success;
+        }
+    }
 }
 
 
