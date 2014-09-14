@@ -29,12 +29,13 @@
             android:parentActivityName=".LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="swampthings.dems.LoginActivity" />
+                android:value=".LoginActivity" />
         </activity>
         <activity android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true"
+            android:noHistory="true"
             >
         </activity>
 

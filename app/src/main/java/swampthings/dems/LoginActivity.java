@@ -55,6 +55,9 @@ public class LoginActivity extends Activity implements
 
     }
 
+    /* Overrided method which runs on activity creation
+     * Creates view and sets up up Google+ API
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,9 @@ public class LoginActivity extends Activity implements
 
     }
 
+    /* Overrided method which runs on activity startup
+     * Begins connection to Google+ and adds event listener
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -77,6 +83,9 @@ public class LoginActivity extends Activity implements
         findViewById(R.id.sign_in_button).setOnClickListener(this);
     }
 
+    /* Overrided method which runs on activity termination
+     * Disconnects Google+ API on activity end
+     */
     @Override
     protected void onStop() {
         super.onStop();
@@ -86,6 +95,9 @@ public class LoginActivity extends Activity implements
         }
     }
 
+    /* Method which runs on successful connection/login to Google+ API
+     * Collects Google Account info and calls RESTful API calls
+     */
     @Override
     public void onConnected(Bundle bundle) {
         // We've resolved any connection errors.  googleApiClient can be used to
@@ -99,7 +111,7 @@ public class LoginActivity extends Activity implements
         JSONObject profile = new JSONObject();
 
         try {
-
+            //add fields to JSONObject
             profile.put("id", id);
             profile.put("name", name);
             profile.put("email", email);
@@ -108,16 +120,21 @@ public class LoginActivity extends Activity implements
             //error
         }
 
+        // Execute RESTful calls as a background task (another thread)
         new CheckAccountExists().execute(profile);
 
     }
 
 
+    /* Reconnect if connection is suspended
+     */
     @Override
     public void onConnectionSuspended(int i) {
         googleApiClient.connect();
     }
 
+    /* Try to recover from failed connection to Google+
+     */
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         if (!intentInProgress) {
@@ -133,6 +150,8 @@ public class LoginActivity extends Activity implements
         }
     }
 
+    /* Process result of connection attempt.
+     */
     @Override
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         if (requestCode == RC_SIGN_IN) {
@@ -154,14 +173,19 @@ public class LoginActivity extends Activity implements
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.sign_in_button && !googleApiClient.isConnecting()) {
+        if (v.getId() == R.id.sign_in_button && !googleApiClient.isConnecting() && !googleApiClient.isConnected()) {
             signInClicked = true;
             resolveSignInErrors();
         }
     }
 
+
+    /* RESTful API calls background task
+     * Runs in a separate thread than main activity
+     */
     protected class CheckAccountExists extends AsyncTask<JSONObject, Integer, String> {
 
+        // Executes doInBackground task first
         @Override
         protected String doInBackground(JSONObject... params) {
             String id = "";
@@ -180,16 +204,21 @@ public class LoginActivity extends Activity implements
             return id;
         }
 
+        // Tasks result of doInBackground and executes after completion of task
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+            // Move onto the main activity
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
+            LoginActivity.this.finish();
 
         }
 
 
+        // Checks whether a patient is already registered in the app database
+        // returns true if registered, false otherwise
         private boolean CheckPatientExists(String id) {
             AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
             HttpGet request = new HttpGet(patientAPIURL + id);
@@ -214,6 +243,8 @@ public class LoginActivity extends Activity implements
             return exists;
         }
 
+        // Registers a patient into the app database by passing their Google account data
+        // through RESTful API POST request
         private boolean CreateNewAccount(JSONObject profile) {
             AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
             HttpPost request = new HttpPost(patientAPIURL);
