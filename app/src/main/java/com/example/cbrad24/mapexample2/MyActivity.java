@@ -3,6 +3,7 @@ package com.example.cbrad24.mapexample2;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +21,8 @@ public class MyActivity extends Activity {
     GoogleMap map;
     TextView loctxt;
     Marker patient;
+    Menu menuitem;
+    MenuItem sendMenuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +63,14 @@ public class MyActivity extends Activity {
         CameraUpdate update = CameraUpdateFactory.newLatLngZoom(position, 16);
         map.animateCamera( update );
         loctxt.setText( "Latitude:\t\t" +  latitude  + "\nLongitude:\t"+ longitude );
-
-        new Restful().execute(latitude, longitude);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my, menu);
+        menuitem = menu;
+        sendMenuItem = menu.findItem(R.id.action_send);
         return true;
     }
 
@@ -77,7 +80,18 @@ public class MyActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_send) {
+            gps.getLocation();
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+
+            Restful restful = new Restful();
+            restful.setLatLong(latitude, longitude);
+            restful.setMenuItem(sendMenuItem);
+            restful.execute("http://demsweb.herokuapp.com/api/patient/1/locations");
+
+            sendMenuItem.setTitle("Sending...");
+
             return true;
         }
         return super.onOptionsItemSelected(item);
