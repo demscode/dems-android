@@ -15,6 +15,9 @@ import android.app.Notification.*;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -70,9 +73,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         }
 
 
-    public void setNotification() {
-        // Intent to run notification
-        Intent intent = new Intent(this, Notification.class);
+    public void notification() {
+        // Prepare intent which is triggered if the notification is selected
+        Intent intent = new Intent(this, NotificationReceiverActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification
@@ -80,32 +83,18 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         Notification n  = new Notification.Builder(this)
                 .setContentTitle("Reminder!")
                 .setContentText("Subject")
-                .setSmallIcon(R.drawable.reminder)
+                .setSmallIcon(R.drawable.icon)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
-                .addAction(R.drawable.checkbox_colourful, "Ok", pIntent)
-                .addAction(R.drawable.alarm, "Sleep", pIntent)
-                .addAction(R.drawable.ic_launcher, "More", pIntent).build();
+                .addAction(R.drawable.icon, "Call", pIntent)
+                .addAction(R.drawable.icon, "More", pIntent)
+                .addAction(R.drawable.icon, "And more", pIntent).build();
 
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         notificationManager.notify(0, n);
-        // Set alarm time here!
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-/*
-        calendar.set(Calendar.YEAR, );
-        calendar.set(Calendar.MONTH, );
-        calendar.set(Calendar.DAY_OF_MONTH, );
-        calendar.set(Calendar.HOUR_OF_DAY, );
-        calendar.set(Calendar.MINUTE, );
-        calendar.set(Calendar.SECOND, 0);
- */
-        // AlarmManager will run the pending intent when date/time comes
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
     }
 
 
