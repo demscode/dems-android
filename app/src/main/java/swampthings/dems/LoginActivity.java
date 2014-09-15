@@ -222,7 +222,8 @@ public class LoginActivity extends Activity implements
 
             // Move onto the main activity
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            // Pass the current patient id to the main activity
+			
+            // Parse id of current user to main activity before starting
             intent.putExtra("id", id);
             startActivity(intent);
             LoginActivity.this.finish();
