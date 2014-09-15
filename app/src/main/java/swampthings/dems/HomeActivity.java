@@ -9,6 +9,9 @@ import android.app.Notification.*;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -23,7 +26,6 @@ import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
 import org.json.JSONObject;
-
 import java.util.Calendar;
 
 public class HomeActivity extends Activity implements View.OnClickListener {
@@ -67,8 +69,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
 
     public void setNotification() {
-        // Intent to run notification
-        Intent intent = new Intent(this, Notification.class);
+        // Prepare intent which is triggered if the notification is selected
+        Intent intent = new Intent(this, NotificationReceiverActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification
@@ -76,12 +78,12 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         Notification n  = new Notification.Builder(this)
                 .setContentTitle("Reminder!")
                 .setContentText("Subject")
-                .setSmallIcon(R.drawable.reminder)
+                .setSmallIcon(R.drawable.icon)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
-                .addAction(R.drawable.checkbox_colourful, "Ok", pIntent)
-                .addAction(R.drawable.alarm, "Sleep", pIntent)
-                .addAction(R.drawable.ic_launcher, "More", pIntent).build();
+                .addAction(R.drawable.icon, "Call", pIntent)
+                .addAction(R.drawable.icon, "More", pIntent)
+                .addAction(R.drawable.icon, "And more", pIntent).build();
 
 
         NotificationManager notificationManager =
