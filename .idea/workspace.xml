@@ -42,9 +42,19 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
 =======
     <list default="true" id="607f2852-6d12-4134-a32c-c1556804c7f8" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/notification_receiver.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+>>>>>>> Basic notification implementation.
     </list>
     <ignored path="DemS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,12 +90,17 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4605">
               <caret line="52" column="122" selection-start-line="52" selection-start-column="122" selection-end-line="52" selection-end-column="122" />
 =======
             <state vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="918">
               <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+            <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+>>>>>>> Basic notification implementation.
               <folding />
             </state>
           </provider>
@@ -141,13 +156,17 @@
 =======
       <file leaf-file-name="activity_login.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
+            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
               <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
 >>>>>>> Parsing of patient ID to HomeActivity.
               <folding />
             </state>
           </provider>
+<<<<<<< HEAD
         </entry>
       </file>
       <file leaf-file-name="activity_home.xml" pinned="false" current="false" current-in-tab="false">
@@ -176,9 +195,14 @@
           </provider>
 =======
       <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
+=======
+        </entry>
+      </file>
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
+>>>>>>> Basic notification implementation.
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3738532" vertical-offset="3176" max-vertical-offset="4896">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3125" max-vertical-offset="4896">
               <caret line="208" column="49" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -187,11 +211,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="896" max-vertical-offset="1768">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.7465596" vertical-offset="913" max-vertical-offset="2312">
+              <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NotificationReceiverActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_notification_receiver.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="374">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1304,6 +1353,10 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
+>>>>>>> Basic notification implementation.
         <option value="$PROJECT_DIR$/android-wait-for-emulator" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/header_gradient.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_login.xml" />
@@ -1315,11 +1368,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/DemsAPI.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+=======
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
+>>>>>>> Basic notification implementation.
       </list>
     </option>
   </component>
@@ -1381,12 +1440,17 @@
     </navigator>
     <panes>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
 =======
       <pane id="Scope" />
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+>>>>>>> Basic notification implementation.
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1582,10 +1646,14 @@
         </subPane>
       </pane>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+      <pane id="Scope" />
+>>>>>>> Basic notification implementation.
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1629,6 +1697,7 @@
       <recent name="swampthings.dems" />
     </key>
     <key name="android.template.parentActivityClass">
+      <recent name="swampthings.dems.HomeActivity" />
       <recent name="" />
       <recent name="swampthings.dems.LoginActivity" />
     </key>
@@ -1877,7 +1946,6 @@
 =======
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1911,6 +1979,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.8104575" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1944,7 +2013,19 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
+=======
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="391">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+>>>>>>> Basic notification implementation.
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state vertical-scroll-proportion="0.0" vertical-offset="2730" max-vertical-offset="4020">
@@ -1974,14 +2055,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -2014,6 +2095,106 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2550">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1605">
+          <caret line="33" column="73" selection-start-line="33" selection-start-column="73" selection-end-line="33" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="480">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1605">
+          <caret line="33" column="73" selection-start-line="33" selection-start-column="73" selection-end-line="33" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1605">
+          <caret line="33" column="73" selection-start-line="33" selection-start-column="73" selection-end-line="33" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/swampthings/dems/ApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29528537" vertical-offset="0" max-vertical-offset="403">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2550">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dems-android.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> Basic notification implementation.
     <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554">
@@ -2124,56 +2305,86 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30177516" vertical-offset="0" max-vertical-offset="845">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1768">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="845">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> Basic notification implementation.
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <state vertical-scroll-proportion="0.6875" vertical-offset="1164" max-vertical-offset="1740">
           <caret line="108" column="8" selection-start-line="108" selection-start-column="8" selection-end-line="108" selection-end-column="8" />
           <folding />
 =======
         <state vertical-scroll-proportion="0.3738532" vertical-offset="3176" max-vertical-offset="4896">
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="3125" max-vertical-offset="4896">
+>>>>>>> Basic notification implementation.
           <caret line="208" column="49" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
 >>>>>>> Parsing of patient ID to HomeActivity.
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7465596" vertical-offset="913" max-vertical-offset="2312">
+          <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
