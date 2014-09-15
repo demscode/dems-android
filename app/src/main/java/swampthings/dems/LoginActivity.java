@@ -206,11 +206,13 @@ public class LoginActivity extends Activity implements
 
         // Tasks result of doInBackground and executes after completion of task
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String id) {
+            super.onPostExecute(id);
 
             // Move onto the main activity
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            // Parse id of current user to main activity before starting
+            intent.putExtra("id", id);
             startActivity(intent);
             LoginActivity.this.finish();
 
