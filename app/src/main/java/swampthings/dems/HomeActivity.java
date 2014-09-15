@@ -1,10 +1,13 @@
 package swampthings.dems;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 
 public class HomeActivity extends Activity {
     /**  Tracking functionality "borrowed" from Stack Overflow, be sure to take what is needed but
@@ -73,10 +76,43 @@ public class HomeActivity extends Activity {
 
         }
        */
+
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Grab the id parsed from LoginActivity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getString("id");
+        }
+    }
+
+    public void notification() {
+        // Prepare intent which is triggered if the notification is selected
+        Intent intent = new Intent(this, NotificationReceiverActivity.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        // Build notification
+        // The addAction re-uses the same intent to keep the example short
+        Notification n  = new Notification.Builder(this)
+                .setContentTitle("Reminder!")
+                .setContentText("Subject")
+                .setSmallIcon(R.drawable.icon)
+                .setContentIntent(pIntent)
+                .setAutoCancel(true)
+                .addAction(R.drawable.icon, "Call", pIntent)
+                .addAction(R.drawable.icon, "More", pIntent)
+                .addAction(R.drawable.icon, "And more", pIntent).build();
+
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, n);
     }
 
 

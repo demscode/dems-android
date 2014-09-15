@@ -33,8 +33,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="607f2852-6d12-4134-a32c-c1556804c7f8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/menu/notification_receiver.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="DemS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,8 +74,8 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="918">
-              <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+              <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -88,21 +93,21 @@
       </file>
       <file leaf-file-name="activity_login.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
+            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
               <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3738532" vertical-offset="3176" max-vertical-offset="4896">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3125" max-vertical-offset="4896">
               <caret line="208" column="49" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -111,11 +116,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="896" max-vertical-offset="1768">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.7465596" vertical-offset="913" max-vertical-offset="2312">
+              <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NotificationReceiverActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_notification_receiver.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="374">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1219,7 +1249,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
         <option value="$PROJECT_DIR$/android-wait-for-emulator" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/header_gradient.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml" />
@@ -1233,6 +1262,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/DemsAPI.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
       </list>
     </option>
   </component>
@@ -1293,7 +1325,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1532,8 +1565,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1577,6 +1609,7 @@
       <recent name="swampthings.dems" />
     </key>
     <key name="android.template.parentActivityClass">
+      <recent name="swampthings.dems.HomeActivity" />
       <recent name="" />
       <recent name="swampthings.dems.LoginActivity" />
     </key>
@@ -1803,7 +1836,6 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.72331154" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1826,6 +1858,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.8104575" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1856,28 +1889,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="330">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1680">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="391">
@@ -1937,14 +1948,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -1991,14 +2002,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -2017,14 +2028,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
@@ -2035,14 +2046,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/swampthings/dems/ApplicationTest.java">
@@ -2216,49 +2227,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30177516" vertical-offset="0" max-vertical-offset="845">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1768">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="845">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3738532" vertical-offset="3176" max-vertical-offset="4896">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3125" max-vertical-offset="4896">
           <caret line="208" column="49" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7465596" vertical-offset="913" max-vertical-offset="2312">
+          <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
