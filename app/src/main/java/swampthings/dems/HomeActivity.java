@@ -103,12 +103,12 @@ public class HomeActivity extends Activity {
         Notification n  = new Notification.Builder(this)
                 .setContentTitle("Reminder!")
                 .setContentText("Subject")
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.drawable.reminder)
                 .setContentIntent(pIntent)
                 .setAutoCancel(true)
-                .addAction(R.drawable.icon, "Call", pIntent)
-                .addAction(R.drawable.icon, "More", pIntent)
-                .addAction(R.drawable.icon, "And more", pIntent).build();
+                .addAction(R.drawable.checkbox_colourful, "Ok", pIntent)
+                .addAction(R.drawable.alarm, "Sleep", pIntent)
+                .addAction(R.drawable.ic_launcher, "More", pIntent).build();
 
 
         NotificationManager notificationManager =
