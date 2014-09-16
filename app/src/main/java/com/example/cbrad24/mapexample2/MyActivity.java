@@ -86,6 +86,7 @@ public class MyActivity extends Activity {
             double longitude = gps.getLongitude();
 
             Restful restful = new Restful();
+            //restful.setLatLong(-27.479178, 153.022059);
             restful.setLatLong(latitude, longitude);
             restful.setMenuItem(sendMenuItem);
             restful.execute("http://demsweb.herokuapp.com/api/patient/1/locations");

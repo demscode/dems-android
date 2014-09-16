@@ -58,7 +58,7 @@ public class Restful extends AsyncTask<String, Void, String> {
             JSONObject json = new JSONObject();
             String jsonstr = "";
             try {
-                json.put("latitude",  latitude);
+                json.put("latitude", latitude);
                 json.put("longitude", longitude);
                 json.put("patient_id", 1);
             } catch (JSONException e) {
@@ -73,13 +73,17 @@ public class Restful extends AsyncTask<String, Void, String> {
             httppost.setHeader("Content-type", "application/json");
 
             // Execute HTTP Post Request
+            System.out.println("Sending...");
             HttpResponse response = httpclient.execute(httppost);
 
             inputStream = response.getEntity().getContent();
-            if(inputStream != null)
+            if (inputStream != null) {
                 result = convertInputStreamToString(inputStream);
-            else
+                System.out.println("Sent.");
+            }else{
                 result = "Did not work!";
+                System.out.println("Failed.");
+            }
 
             return result;
         } catch (ClientProtocolException e) {
