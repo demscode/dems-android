@@ -10,8 +10,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.Notification;
+import android.app.AlarmManager;
+import android.app.Notification.*;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -25,7 +28,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
-import org.json.JSONObject;
 import java.util.Calendar;
 
 public class HomeActivity extends Activity implements View.OnClickListener {
@@ -69,8 +71,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
 
     public void setNotification() {
-        // Prepare intent which is triggered if the notification is selected
-        Intent intent = new Intent(this, NotificationReceiverActivity.class);
+        // Intent to run notification
+        Intent intent = new Intent(this, Notification.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         // Build notification
