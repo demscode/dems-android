@@ -41,15 +41,16 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml" />
 =======
     <list default="true" id="607f2852-6d12-4134-a32c-c1556804c7f8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/alarm.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/checkbox_colourful.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/reminder.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
 >>>>>>> Basic notification implementation.
 =======
 >>>>>>> Added icons for notifications.
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
 =======
     <list default="true" id="607f2852-6d12-4134-a32c-c1556804c7f8" name="Default" comment="">
@@ -113,6 +114,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4605">
               <caret line="52" column="122" selection-start-line="52" selection-start-column="122" selection-end-line="52" selection-end-column="122" />
 =======
@@ -125,11 +127,19 @@
             <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="969">
 >>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
 =======
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4605">
               <caret line="52" column="122" selection-start-line="52" selection-start-column="122" selection-end-line="52" selection-end-column="122" />
 =======
             <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+<<<<<<< HEAD
 >>>>>>> Basic notification implementation.
+=======
+=======
+            <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="969">
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
               <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
 >>>>>>> Basic notification implementation.
               <folding />
@@ -143,6 +153,7 @@
           <provider editor-type-id="android-designer">
             <state />
           </provider>
+<<<<<<< HEAD
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
             <state vertical-scroll-proportion="-4.6153846" vertical-offset="45" max-vertical-offset="690">
@@ -218,20 +229,20 @@
 >>>>>>> Added icons for notifications.
       <file leaf-file-name="activity_login.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="357">
+            <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
               <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LoginActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state vertical-scroll-proportion="0.0" vertical-offset="3536" max-vertical-offset="4930">
               <caret line="208" column="49" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
 <<<<<<< HEAD
@@ -240,6 +251,10 @@
                 <element signature="e#532#551#0" expanded="true" />
               </folding>
 =======
+=======
+            <state vertical-scroll-proportion="0.0" vertical-offset="2664" max-vertical-offset="4556">
+              <caret line="189" column="53" selection-start-line="189" selection-start-column="53" selection-end-line="189" selection-end-column="53" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
               <folding />
 >>>>>>> Added icons for notifications.
             </state>
@@ -256,8 +271,36 @@
       <file leaf-file-name="HomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5905963" vertical-offset="1117" max-vertical-offset="2312">
-              <caret line="103" column="18" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
+            <state vertical-scroll-proportion="1.0194954" vertical-offset="2137" max-vertical-offset="3366">
+              <caret line="178" column="31" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4918#4919#0" expanded="true" />
+                <element signature="e#4953#4954#0" expanded="true" />
+                <element signature="e#5006#5007#0" expanded="true" />
+                <element signature="e#5047#5048#0" expanded="true" />
+                <element signature="e#6570#6571#0" expanded="true" />
+                <element signature="e#6623#6624#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Service.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/app/Service.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+              <caret line="51" column="73" selection-start-line="51" selection-start-column="73" selection-end-line="51" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IntentService.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/app/IntentService.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+              <caret line="21" column="8" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="73" />
               <folding />
             </state>
           </provider>
@@ -266,8 +309,8 @@
       <file leaf-file-name="NotificationReceiverActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="306">
-              <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <caret line="10" column="47" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -275,13 +318,17 @@
       </file>
       <file leaf-file-name="activity_notification_receiver.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="374">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
 >>>>>>> Basic notification implementation.
               <folding />
             </state>
           </provider>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -381,6 +428,8 @@
             <state />
           </provider>
 >>>>>>> Added icons for notifications.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         </entry>
       </file>
     </leaf>
@@ -1854,6 +1903,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
@@ -1863,6 +1913,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
 >>>>>>> Basic notification implementation.
+=======
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         <option value="$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java" />
 >>>>>>> Basic notification implementation.
       </list>
@@ -1931,6 +1988,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Basic notification implementation.
       <pane id="AndroidView" />
@@ -1944,6 +2002,8 @@
       <pane id="PackagesPane" />
 =======
 >>>>>>> Added icons for notifications.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <pane id="AndroidView" />
 >>>>>>> Basic notification implementation.
 =======
@@ -1965,7 +2025,12 @@
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
 >>>>>>> Added icons for notifications.
+<<<<<<< HEAD
 >>>>>>> Added icons for notifications.
+=======
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2407,6 +2472,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
@@ -2432,11 +2498,21 @@
 >>>>>>> Basic notification implementation.
 =======
 =======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+=======
       <pane id="Scope" />
 >>>>>>> Basic notification implementation.
 =======
 >>>>>>> Added icons for notifications.
+<<<<<<< HEAD
 >>>>>>> Added icons for notifications.
+=======
+=======
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2742,13 +2818,16 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293348" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26066098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32628062" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
 >>>>>>> Basic notification implementation.
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30812013" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30812013" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32925472" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32703003" sideWeight="0.8317359" order="7" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2762,11 +2841,15 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26066098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32628062" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30812013" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32814237" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32666665" sideWeight="0.8325942" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3303671" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18550107" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Parsing of patient ID to HomeActivity.
 =======
@@ -2774,6 +2857,10 @@
 >>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
 =======
 >>>>>>> Parsing of patient ID to HomeActivity.
+=======
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293348" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
 <<<<<<< HEAD
@@ -2801,8 +2888,6 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
 >>>>>>> Basic notification implementation.
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39933258" sideWeight="0.8104575" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26066098" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329718" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2839,12 +2924,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml">
 =======
 =======
 >>>>>>> Added icons for notifications.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings_activity_login.xml">
@@ -2898,19 +2986,24 @@
       </provider>
     </entry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
 =======
 >>>>>>> Basic notification implementation.
+=======
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -2918,9 +3011,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="480">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           <folding />
 >>>>>>> Basic notification implementation.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         </state>
       </provider>
     </entry>
@@ -2967,14 +3063,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
@@ -2982,9 +3078,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="480">
           <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           <folding />
 >>>>>>> Basic notification implementation.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         </state>
       </provider>
     </entry>
@@ -2996,14 +3095,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
@@ -3014,14 +3113,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/androidTest/java/swampthings/dems/ApplicationTest.java">
@@ -3095,6 +3194,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4605">
           <caret line="52" column="122" selection-start-line="52" selection-start-column="122" selection-end-line="52" selection-end-column="122" />
           <folding />
@@ -3118,6 +3218,10 @@
           <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
 >>>>>>> Basic notification implementation.
           <folding />
+=======
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         </state>
       </provider>
     </entry>
@@ -3125,6 +3229,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
 =======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> Basic notification implementation.
       <provider editor-type-id="android-designer">
@@ -3137,6 +3242,11 @@
 =======
 >>>>>>> Added icons for notifications.
 >>>>>>> Added icons for notifications.
+=======
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.6153846" vertical-offset="45" max-vertical-offset="690">
           <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
@@ -3146,6 +3256,7 @@
           </folding>
         </state>
       </provider>
+<<<<<<< HEAD
 <<<<<<< HEAD
     </entry>
 <<<<<<< HEAD
@@ -3254,7 +3365,13 @@
 >>>>>>> Basic notification implementation.
           <folding />
         </state>
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/checkbox_colourful.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
+<<<<<<< HEAD
 <<<<<<< HEAD
     </entry>
 <<<<<<< HEAD
@@ -3265,10 +3382,39 @@
 =======
 >>>>>>> Added icons for notifications.
       <provider editor-type-id="android-designer">
+=======
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/reminder.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images">
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_notification_receiver.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
@@ -3281,13 +3427,30 @@
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="969">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.444445" vertical-offset="0" max-vertical-offset="357">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/NotificationReceiverActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+<<<<<<< HEAD
 <<<<<<< HEAD
           <caret line="10" column="47" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="47" />
           <folding />
@@ -3299,6 +3462,9 @@
           </folding>
 >>>>>>> Basic notification implementation.
 =======
+=======
+          <caret line="10" column="47" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="47" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
           <folding />
 >>>>>>> Added icons for notifications.
         </state>
@@ -3364,46 +3530,41 @@
 >>>>>>> Basic notification implementation.
 =======
 =======
+=======
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/app/IntentService.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="73" />
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
           <folding />
 >>>>>>> Added icons for notifications.
 >>>>>>> Added icons for notifications.
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/checkbox_colourful.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="jar://$APPLICATION_HOME_DIR$/sdk/platforms/android-19/android.jar!/android/app/Service.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <caret line="51" column="73" selection-start-line="51" selection-start-column="73" selection-end-line="51" selection-end-column="73" />
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/reminder.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_launcher.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2664" max-vertical-offset="4556">
+          <caret line="189" column="53" selection-start-line="189" selection-start-column="53" selection-end-line="189" selection-end-column="53" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/swampthings/dems/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         <state vertical-scroll-proportion="1.0194954" vertical-offset="2137" max-vertical-offset="3366">
           <caret line="178" column="31" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
           <folding>
@@ -3415,6 +3576,7 @@
             <element signature="e#6570#6571#0" expanded="true" />
             <element signature="e#6623#6624#0" expanded="true" />
           </folding>
+<<<<<<< HEAD
 =======
         <state vertical-scroll-proportion="0.7465596" vertical-offset="913" max-vertical-offset="2312">
           <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
@@ -3424,6 +3586,8 @@
 >>>>>>> Added icons for notifications.
           <folding />
 >>>>>>> Basic notification implementation.
+=======
+>>>>>>> Added alarm functionality to spring notification at appropriate time. Will need tweaking when RESTful functionaluity is added.
         </state>
       </provider>
     </entry>
