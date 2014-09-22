@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +15,12 @@ import org.apache.http.entity.StringEntity;
 import org.json.JSONObject;
 
 
+
 public class HomeActivity extends Activity implements View.OnClickListener {
 
     protected String patientID;
     protected GPS gps;
-    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";//"http://demsweb.herokuapp.com/api/patient/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +35,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             pid.setText("PatientID: " + patientID);
         }
 
-        gps = new GPS(this);
-        if (gps.canGetLocation()) {
-           // POST initial location to web service
-
-        } else {
+        gps = new GPS(this, patientID);
+        if (!gps.canGetLocation()) {
+           // ask user to enable location services
             gps.showSettingsAlert();
         }
 
@@ -50,6 +48,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onStart() {
         super.onStart();
         findViewById(R.id.panic_button).setOnClickListener(this);
+
+        // post the intial location
+        if (gps.canGetLocation()) {
+            gps.POSTLocation();
+        }
     }
 
 
@@ -74,9 +77,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        System.out.println("In onClick");
         if (v.getId() == R.id.panic_button) {
-            System.out.println("Panic Button");
             //panic button pressed
 
             //get location
@@ -91,7 +92,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             // send panic through restful
             new PanicRESTful().execute(location);
-            System.out.println(location);
         }
 
     }
@@ -109,7 +109,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             HttpPost request = new HttpPost(patientAPIURL + patientID + "/panic");
             HttpResponse response;
             boolean success = false;
-            StringBuilder builder = new StringBuilder();
 
             try {
 
@@ -145,4 +144,5 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         }
 
     }
+
 }
