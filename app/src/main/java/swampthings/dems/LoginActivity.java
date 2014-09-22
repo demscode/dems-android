@@ -85,7 +85,7 @@ public class LoginActivity extends Activity implements
     @Override
     protected void onStart() {
         super.onStart();
-        googleApiClient.connect();
+        //googleApiClient.connect();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
     }
 
@@ -179,9 +179,12 @@ public class LoginActivity extends Activity implements
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.sign_in_button && !googleApiClient.isConnecting() && !googleApiClient.isConnected()) {
-            signInClicked = true;
-            resolveSignInErrors();
+        if (v.getId() == R.id.sign_in_button) {
+        googleApiClient.connect();
+            if(!googleApiClient.isConnecting() && !googleApiClient.isConnected()) {
+                signInClicked = true;
+                resolveSignInErrors();
+            }
         }
     }
 
