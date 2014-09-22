@@ -14,6 +14,9 @@
     -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+    <!-- To retrieve location information -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"

@@ -1,81 +1,26 @@
 package swampthings.dems;
 
 import android.app.Activity;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
 
-public class HomeActivity extends Activity {
-    /**  Tracking functionality "borrowed" from Stack Overflow, be sure to take what is needed but
-        change variable names etc.
-    */
-    /*
-    public class Tracking extends MapActivity implements LocationListener {
 
-        LocationManager locman;
-        LocationListener loclis;
-        Location Location;
-        private MapView map;
-
-        List<GeoPoint> geoPointsArray = new ArrayList<GeoPoint>();
-        private MapController controller;
-        String provider = LocationManager.GPS_PROVIDER;
-        double lat;
-        double lon;
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.map);
-            initMapView();
-            initMyLocation();
-            locman = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            // locman.requestLocationUpdates(provider,60000, 100,loclis);
-            // Location = locman.getLastKnownLocation(provider);
-
-        }
-
-        // Find and initialize the map view.
-        private void initMapView() {
-            map = (MapView) findViewById(R.id.map);
-            controller = map.getController();
-            map.setSatellite(false);
-            map.setBuiltInZoomControls(true);
-        }
-
-        // Find Current Position on Map.
-        private void initMyLocation() {
-            final MyLocationOverlay overlay = new MyLocationOverlay(this, map);
-            overlay.enableMyLocation();
-            overlay.enableCompass(); // does not work in emulator
-            overlay.runOnFirstFix(new Runnable() {
-                public void run() {
-                    // Zoom in to current location
-                    controller.setZoom(24);
-                    controller.animateTo(overlay.getMyLocation());
-                }
-            });
-            map.getOverlays().add(overlay);
-        }
-
-        // --This is the main functionality we need!--
-        @Override
-        public void onLocationChanged(Location location) {
-            if (Location != null) {
-                lat = Location.getLatitude();
-                lon = Location.getLongitude();
-                GeoPoint New_geopoint = new GeoPoint((int) (lat * 1e6),
-                        (int) (lon * 1e6));
-                controller.animateTo(New_geopoint);
-
-            }
-
-        }
-       */
+public class HomeActivity extends Activity implements View.OnClickListener {
 
     protected String patientID;
+    protected GPS gps;
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +35,21 @@ public class HomeActivity extends Activity {
             pid.setText("PatientID: " + patientID);
         }
 
+        gps = new GPS(this);
+        if (gps.canGetLocation()) {
+           // POST initial location to web service
+
+        } else {
+            gps.showSettingsAlert();
+        }
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        findViewById(R.id.panic_button).setOnClickListener(this);
     }
 
 
@@ -110,5 +70,79 @@ public class HomeActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        System.out.println("In onClick");
+        if (v.getId() == R.id.panic_button) {
+            System.out.println("Panic Button");
+            //panic button pressed
+
+            //get location
+            gps.getLocation();
+            JSONObject location = new JSONObject();
+            try {
+                location.put("latitude", gps.getLatitude());
+                location.put("longitude", gps.getLongitude());
+            } catch (Exception e) {
+                // JSON error
+            }
+
+            // send panic through restful
+            new PanicRESTful().execute(location);
+            System.out.println(location);
+        }
+
+    }
+
+
+    /* RESTful API calls background task for panic button
+     * Runs in a separate thread than main activity
+     */
+    protected class PanicRESTful extends AsyncTask<JSONObject, Integer, Boolean> {
+
+        // Executes doInBackground task first
+        @Override
+        protected Boolean doInBackground(JSONObject... locations) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpPost request = new HttpPost(patientAPIURL + patientID + "/panic");
+            HttpResponse response;
+            boolean success = false;
+            StringBuilder builder = new StringBuilder();
+
+            try {
+
+                StringEntity stringEntity = new StringEntity(locations[0].toString());
+
+                request.setEntity(stringEntity);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+                } else {
+                    success = false;
+                }
+
+
+            } catch (Exception e) {
+                success =  false;
+            } finally {
+                httpClient.close();
+            }
+
+            return success;
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
+
+        }
+
     }
 }
