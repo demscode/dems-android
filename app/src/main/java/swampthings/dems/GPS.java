@@ -12,14 +12,23 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
+
 public class GPS extends Service implements LocationListener {
 
     private final Context mContext;
+    protected String patientID;
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";//"http://demsweb.herokuapp.com/api/patient/";
 
     // flag for GPS status
     boolean isGPSEnabled = false;
@@ -38,14 +47,16 @@ public class GPS extends Service implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 30 * 1; // 30 seconds
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    public GPS(Context context) {
+    public GPS(Context context, String patientID) {
         this.mContext = context;
+        this.patientID = patientID;
         getLocation();
+
     }
 
     public Location getLocation() {
@@ -183,7 +194,7 @@ public class GPS extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
+        POSTLocation();
     }
 
     @Override
@@ -199,8 +210,86 @@ public class GPS extends Service implements LocationListener {
     }
 
     @Override
-    public IBinder onBind(Intent arg0) {
+    public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    public void POSTLocation() {
+        JSONObject location = new JSONObject();
+
+        try {
+            location.put("latitude", this.getLatitude());
+            location.put("longitude", this.getLongitude());
+        } catch (Exception e) {
+            // JSON error
+        }
+
+        new LocationRESTful().execute(location);
+    }
+
+
+    /* RESTful API calls background task for posting the patient's location to the webservice
+     * Runs in a separate thread than main activity
+     */
+    protected class LocationRESTful extends AsyncTask<JSONObject, Integer, Boolean> {
+
+        // Executes doInBackground task first
+        @Override
+        protected Boolean doInBackground(JSONObject... locations) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpPost request = new HttpPost(patientAPIURL + patientID + "/locations");
+            HttpResponse response;
+            boolean success = false;
+            //StringBuilder builder = new StringBuilder();
+
+            try {
+
+                StringEntity stringEntity = new StringEntity(locations[0].toString());
+
+                request.setEntity(stringEntity);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+
+                    // Read the JSON response - used to see if patient is inside the fence
+                    /*HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    JSONObject json = new JSONObject(jsonString);*/
+
+                } else {
+                    success = false;
+                }
+
+
+            } catch (Exception e) {
+                success =  false;
+            } finally {
+                httpClient.close();
+            }
+
+            return success;
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
+
+            // update the fence status for the patient
+        }
+
     }
 
 }
