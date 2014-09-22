@@ -16,11 +16,17 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 /**
@@ -112,7 +118,7 @@ public class LoginActivity extends Activity implements
 
         try {
             //add fields to JSONObject
-            profile.put("id", id);
+            profile.put("gid", id);
             profile.put("name", name);
             profile.put("email", email);
 
@@ -190,27 +196,31 @@ public class LoginActivity extends Activity implements
         protected String doInBackground(JSONObject... params) {
             String id = "";
             try {
-                id = params[0].getString("id");
+                id = params[0].getString("gid");
             } catch (Exception e) {
                 //id not defined
             }
 
-            if (CheckPatientExists(id)) {
-                return id;
+
+            String patientID = CheckPatientExists(id);
+            if (patientID != null) {
+                return patientID;
             } else {
-                CreateNewAccount(params[0]);
+                patientID = CreateNewAccount(params[0]);
             }
 
-            return id;
+            return patientID;
         }
 
         // Tasks result of doInBackground and executes after completion of task
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String id) {
+            super.onPostExecute(id);
 
             // Move onto the main activity
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            // Pass the current patient id to the main activity
+            intent.putExtra("id", id);
             startActivity(intent);
             LoginActivity.this.finish();
 
@@ -219,11 +229,13 @@ public class LoginActivity extends Activity implements
 
         // Checks whether a patient is already registered in the app database
         // returns true if registered, false otherwise
-        private boolean CheckPatientExists(String id) {
+        private String CheckPatientExists(String id) {
             AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
-            HttpGet request = new HttpGet(patientAPIURL + id);
+            HttpGet request = new HttpGet(patientAPIURL + "google/" + id);
             HttpResponse response;
             boolean exists = false;
+            String objectId = null;
+            StringBuilder builder = new StringBuilder();
 
             try {
                 response = httpClient.execute(request);
@@ -231,8 +243,20 @@ public class LoginActivity extends Activity implements
 
                 if (response.getStatusLine().getStatusCode() == 200) {
                     exists = true;
-                }
 
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    JSONObject json = new JSONObject(jsonString);
+                    objectId = json.getString("id");
+                }
 
             } catch (Exception e) {
                 exists = false;
@@ -240,16 +264,22 @@ public class LoginActivity extends Activity implements
                 httpClient.close();
             }
 
-            return exists;
+            if (exists) {
+                return objectId;
+            } else {
+                return null;
+            }
         }
 
         // Registers a patient into the app database by passing their Google account data
         // through RESTful API POST request
-        private boolean CreateNewAccount(JSONObject profile) {
+        private String CreateNewAccount(JSONObject profile) {
             AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
             HttpPost request = new HttpPost(patientAPIURL);
             HttpResponse response;
             boolean success = false;
+            String objectId = null;
+            StringBuilder builder = new StringBuilder();
 
             try {
 
@@ -263,6 +293,19 @@ public class LoginActivity extends Activity implements
 
                 if (response.getStatusLine().getStatusCode() == 200) {
                     success = true;
+
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    JSONObject json = new JSONObject(jsonString);
+                    objectId = json.getString("id");
                 }
 
 
@@ -273,7 +316,11 @@ public class LoginActivity extends Activity implements
                 httpClient.close();
             }
 
-            return success;
+            if (success) {
+                return objectId;
+            } else {
+                return null;
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class HomeActivity extends Activity {
@@ -73,10 +74,22 @@ public class HomeActivity extends Activity {
 
         }
        */
+
+    protected String patientID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Grab the patient id passed from the LoginActivity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            patientID = extras.getString("id");
+            TextView pid = (TextView) findViewById(R.id.PatientID);
+            pid.setText("PatientID: " + patientID);
+        }
+
     }
 
 
