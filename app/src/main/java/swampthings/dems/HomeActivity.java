@@ -22,12 +22,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+import java.util.Date;
 
 public class HomeActivity extends Activity implements View.OnClickListener {
 
@@ -62,32 +64,48 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onStart();
         findViewById(R.id.panic_button).setOnClickListener(this);
 
-        // post the intial location
+        // post the initial location
         if (gps.canGetLocation()) {
             gps.POSTLocation();
         }
-        }
+
+        new ReminderRESTful().execute();
+    }
 
 
-    public void setNotification() {
-        // Intent to run notification
-        Intent intent = new Intent(this, Notification.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+    public void setAlarms(JSONArray reminders) throws JSONException {
 
-        // Set alarm time here!
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-/*
-        calendar.set(Calendar.YEAR, );
-        calendar.set(Calendar.MONTH, );
-        calendar.set(Calendar.DAY_OF_MONTH, );
-        calendar.set(Calendar.HOUR_OF_DAY, );
-        calendar.set(Calendar.MINUTE, );
-        calendar.set(Calendar.SECOND, 0);
+        for(int i = 0; i < reminders.length(); i++) {
+
+            Calendar calendar = Calendar.getInstance();
+
+            JSONObject reminder = reminders.getJSONObject(i);
+
+            // Retrieve date reminder was set for
+            Long timeStamp = reminder.getLong("time");
+            Date dateTime = new Date((long)timeStamp*1000);
+
+            // Set alarm time here!
+            calendar.setTime(dateTime);
+
+/*            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.YEAR, reminder.getInt("year"));
+            calendar.set(Calendar.MONTH, reminder.getInt("month"));
+            calendar.set(Calendar.DAY_OF_MONTH, reminder.getInt("day"));
+            calendar.set(Calendar.HOUR_OF_DAY, reminder.getInt("hour"));
+            calendar.set(Calendar.MINUTE, reminder.getInt("minute"));
+            calendar.set(Calendar.SECOND, 0);
  */
-        // AlarmManager will run the pending intent when date/time comes
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
+            // Intent to run notification
+            Intent intent = new Intent(this, Notification.class);
+            intent.putExtra("name", reminder.getString("name"));
+            intent.putExtra("message", reminder.getString("message"));
+            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+            // AlarmManager will run the pending intent when date/time comes
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
+        }
     }
 
 
@@ -181,8 +199,18 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     }
 
     protected class Notification extends Service {
-        @Override
-        public void onCreate() {
+
+        private String name;
+        private String message;
+
+        public Notification() {
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
+                name = extras.getString("name");
+                message = extras.getString("message");
+            }
+
+            springNotification(name, message);
         }
 
         @Override
@@ -195,20 +223,17 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             super.onDestroy();
         }
 
-        // Not entirely sure this is correct - can't find api documentation
-        @Override
-        public int onStartCommand(Intent intent, int flags, int startId) {
-            super.onStartCommand(intent, flags, startId);
+        public void springNotification(String name, String message) {
 
             // Prepare intent which is triggered if the notification is selected
-            intent = new Intent(this, NotificationReceiverActivity.class);
+            Intent intent = new Intent(this, NotificationReceiverActivity.class);
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
             // Build notification
             // The addAction re-uses the same intent to keep the example short
             android.app.Notification n  = new Builder(this)
-                    .setContentTitle("Reminder!")
-                    .setContentText("Subject")
+                    .setContentTitle(name)
+                    .setContentText(message)
                     .setSmallIcon(R.drawable.reminder)
                     .setContentIntent(pIntent)
                     .setAutoCancel(true)
@@ -221,8 +246,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             notificationManager.notify(0, n);
-
-            return flags; // ??? - unsure what it wants me to return
         }
 
         @Override
@@ -286,6 +309,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             super.onPostExecute(reminders);
 
             // Do something with the JSONArray of reminders here..
+            try {
+                setAlarms(reminders);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
 
