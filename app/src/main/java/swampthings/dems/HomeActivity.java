@@ -16,11 +16,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 
 public class HomeActivity extends Activity implements View.OnClickListener {
@@ -223,5 +229,65 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         public boolean onUnbind(Intent intent) {
             return super.onUnbind(intent);
         }
+    }
+
+
+    /* RESTful API calls background task for getting reminders
+    * Runs in a separate thread than main activity
+    */
+    protected class ReminderRESTful extends AsyncTask<String, Integer, JSONArray> {
+
+        // Executes doInBackground task first
+        @Override
+        protected JSONArray doInBackground(String... params) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpGet request = new HttpGet(patientAPIURL + patientID + "/reminder");
+            HttpResponse response;
+            boolean success = false;
+            JSONArray reminders = null;
+            StringBuilder builder = new StringBuilder();
+
+            try {
+                response = httpClient.execute(request);
+
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    reminders = new JSONArray(jsonString);
+                }
+
+            } catch (Exception e) {
+                success = false;
+            } finally {
+                httpClient.close();
+            }
+
+            if (success) {
+                return reminders;
+            } else {
+                return null;
+            }
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(JSONArray reminders) {
+            super.onPostExecute(reminders);
+
+            // Do something with the JSONArray of reminders here..
+
+        }
+
     }
 }
