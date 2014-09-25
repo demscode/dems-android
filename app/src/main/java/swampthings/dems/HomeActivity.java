@@ -1,16 +1,14 @@
 package swampthings.dems;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.IntentFilter;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.app.AlarmManager;
-import android.app.Notification.*;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,14 +26,17 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Calendar;
-import java.util.Date;
+
 
 public class HomeActivity extends Activity implements View.OnClickListener {
 
     protected String patientID;
     protected GPS gps;
     protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+
+    private AlarmManager alarmManager;
+    private ReminderReceiver broadcastReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +51,17 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             pid.setText("PatientID: " + patientID);
         }
 
+        // set up GPS service
         gps = new GPS(this, patientID);
         if (!gps.canGetLocation()) {
            // ask user to enable location services
             gps.showSettingsAlert();
         }
 
+        // setup reminder/alarm services
+        broadcastReceiver = new ReminderReceiver();
+        registerReceiver(broadcastReceiver, new IntentFilter("swampthings.dems"));
+        alarmManager = (AlarmManager)(this.getSystemService(Context.ALARM_SERVICE));
 
     }
 
@@ -74,38 +80,30 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
 
     public void setAlarms(JSONArray reminders) throws JSONException {
-
         for(int i = 0; i < reminders.length(); i++) {
 
-            Calendar calendar = Calendar.getInstance();
-
             JSONObject reminder = reminders.getJSONObject(i);
+            System.out.println(reminder);
 
-            // Retrieve date reminder was set for
-            Long timeStamp = reminder.getLong("time");
-            Date dateTime = new Date((long)timeStamp*1000);
+            long timeStamp = reminder.getLong("time");
+            String message = reminder.getString("message");
+            String title = reminder.getString("name");
+            int id = reminder.getString("id").hashCode();
 
-            // Set alarm time here!
-            calendar.setTime(dateTime);
+            Intent intent = new Intent(this, ReminderReceiver.class);
+            intent.putExtra("message", message);
+            intent.putExtra("title", title);
+            intent.putExtra("id", id);
 
-/*            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.YEAR, reminder.getInt("year"));
-            calendar.set(Calendar.MONTH, reminder.getInt("month"));
-            calendar.set(Calendar.DAY_OF_MONTH, reminder.getInt("day"));
-            calendar.set(Calendar.HOUR_OF_DAY, reminder.getInt("hour"));
-            calendar.set(Calendar.MINUTE, reminder.getInt("minute"));
-            calendar.set(Calendar.SECOND, 0);
- */
-            // Intent to run notification
-            Intent intent = new Intent(this, Notification.class);
-            intent.putExtra("name", reminder.getString("name"));
-            intent.putExtra("message", reminder.getString("message"));
-            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-            // AlarmManager will run the pending intent when date/time comes
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, id, new Intent(intent), 0));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        //alarmManager.cancel(pendingIntent);
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
     }
 
 
@@ -198,7 +196,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     }
 
-    protected class Notification extends Service {
+    /*protected class Notification extends Service {
 
         private String name;
         private String message;
@@ -226,7 +224,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         public void springNotification(String name, String message) {
 
             // Prepare intent which is triggered if the notification is selected
-            Intent intent = new Intent(this, NotificationReceiverActivity.class);
+            Intent intent = new Intent();
             PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
             // Build notification
@@ -252,7 +250,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         public boolean onUnbind(Intent intent) {
             return super.onUnbind(intent);
         }
-    }
+    } */
 
 
     /* RESTful API calls background task for getting reminders
@@ -307,6 +305,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         @Override
         protected void onPostExecute(JSONArray reminders) {
             super.onPostExecute(reminders);
+
+            System.out.println(reminders);
 
             // Do something with the JSONArray of reminders here..
             try {
