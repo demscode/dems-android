@@ -83,19 +83,33 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         for(int i = 0; i < reminders.length(); i++) {
 
             JSONObject reminder = reminders.getJSONObject(i);
-            System.out.println(reminder);
 
-            long timeStamp = reminder.getLong("time");
-            String message = reminder.getString("message");
-            String title = reminder.getString("name");
-            int id = reminder.getString("id").hashCode();
+            // get status of reminder
+            String status;
+            try {
+                status = reminder.getString("status");
+            } catch (JSONException e) {
+                status = null;
+            }
 
-            Intent intent = new Intent(this, ReminderReceiver.class);
-            intent.putExtra("message", message);
-            intent.putExtra("title", title);
-            intent.putExtra("id", id);
+            // set reminder if it hasn't already been acknowledged
+            if (status == null || status.equals("unknown")) {
 
-            alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, id, new Intent(intent), 0));
+                long timeStamp = reminder.getLong("time");
+                String message = reminder.getString("message");
+                String title = reminder.getString("name");
+                String id = reminder.getString("id");
+                int idHash = id.hashCode();
+
+                Intent intent = new Intent(this, ReminderReceiver.class);
+                intent.putExtra("message", message);
+                intent.putExtra("title", title);
+                intent.putExtra("id", id);
+                intent.putExtra("time", timeStamp);
+                intent.putExtra("patientID", patientID);
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, idHash, new Intent(intent), 0));
+            }
         }
     }
 
@@ -196,63 +210,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     }
 
-    /*protected class Notification extends Service {
-
-        private String name;
-        private String message;
-
-        public Notification() {
-            Bundle extras = getIntent().getExtras();
-            if (extras != null) {
-                name = extras.getString("name");
-                message = extras.getString("message");
-            }
-
-            springNotification(name, message);
-        }
-
-        @Override
-        public IBinder onBind(Intent intent) {
-            return null;
-        }
-
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-        }
-
-        public void springNotification(String name, String message) {
-
-            // Prepare intent which is triggered if the notification is selected
-            Intent intent = new Intent();
-            PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-            // Build notification
-            // The addAction re-uses the same intent to keep the example short
-            android.app.Notification n  = new Builder(this)
-                    .setContentTitle(name)
-                    .setContentText(message)
-                    .setSmallIcon(R.drawable.reminder)
-                    .setContentIntent(pIntent)
-                    .setAutoCancel(true)
-                    .addAction(R.drawable.checkbox_colourful, "Ok", pIntent).build();
-            // Extra buttons if needed?
-            //        .addAction(R.drawable.alarm, "Sleep", pIntent)
-            //        .addAction(R.drawable.ic_launcher, "More", pIntent).build();
-
-            // Run notification
-            NotificationManager notificationManager =
-                    (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.notify(0, n);
-        }
-
-        @Override
-        public boolean onUnbind(Intent intent) {
-            return super.onUnbind(intent);
-        }
-    } */
-
-
     /* RESTful API calls background task for getting reminders
     * Runs in a separate thread than main activity
     */
@@ -306,11 +263,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         protected void onPostExecute(JSONArray reminders) {
             super.onPostExecute(reminders);
 
-            System.out.println(reminders);
-
             // Do something with the JSONArray of reminders here..
             try {
-                setAlarms(reminders);
+                if (reminders != null) {
+                    setAlarms(reminders);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

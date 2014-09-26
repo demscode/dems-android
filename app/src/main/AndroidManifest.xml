@@ -50,6 +50,15 @@
         <receiver android:name=".ReminderReceiver">
         </receiver>
 
+        <activity android:name=".ReminderDisplayActivity"
+            android:parentActivityName=".HomeActivity"
+            android:noHistory="true"
+            android:theme="@style/ReminderDialogTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
     </application>
 
 </manifest>

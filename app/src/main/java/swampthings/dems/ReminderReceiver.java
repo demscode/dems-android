@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class ReminderReceiver extends BroadcastReceiver{
     @Override
@@ -12,6 +11,9 @@ public class ReminderReceiver extends BroadcastReceiver{
         Bundle bundle = intent.getExtras();
 
         //display reminder
-        Toast.makeText(context, bundle.getString("title"), Toast.LENGTH_LONG).show();
+        Intent reminder = new Intent(context, ReminderDisplayActivity.class);
+        reminder.putExtras(bundle);
+        reminder.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(reminder);
     }
 }
