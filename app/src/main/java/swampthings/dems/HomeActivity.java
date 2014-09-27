@@ -1,26 +1,42 @@
 package swampthings.dems;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.IntentFilter;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class HomeActivity extends Activity implements View.OnClickListener {
 
     protected String patientID;
     protected GPS gps;
-    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";//"http://demsweb.herokuapp.com/api/patient/";
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+
+    private AlarmManager alarmManager;
+    private ReminderReceiver broadcastReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +51,17 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             pid.setText("PatientID: " + patientID);
         }
 
+        // set up GPS service
         gps = new GPS(this, patientID);
         if (!gps.canGetLocation()) {
            // ask user to enable location services
             gps.showSettingsAlert();
         }
 
+        // setup reminder/alarm services
+        broadcastReceiver = new ReminderReceiver();
+        registerReceiver(broadcastReceiver, new IntentFilter("swampthings.dems"));
+        alarmManager = (AlarmManager)(this.getSystemService(Context.ALARM_SERVICE));
 
     }
 
@@ -49,10 +70,54 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onStart();
         findViewById(R.id.panic_button).setOnClickListener(this);
 
-        // post the intial location
+        // post the initial location
         if (gps.canGetLocation()) {
             gps.POSTLocation();
         }
+
+        new ReminderRESTful().execute();
+    }
+
+
+    public void setAlarms(JSONArray reminders) throws JSONException {
+        for(int i = 0; i < reminders.length(); i++) {
+
+            JSONObject reminder = reminders.getJSONObject(i);
+
+            // get status of reminder
+            String status;
+            try {
+                status = reminder.getString("status");
+            } catch (JSONException e) {
+                status = null;
+            }
+
+            // set reminder if it hasn't already been acknowledged
+            if (status == null || status.equals("unknown")) {
+
+                long timeStamp = reminder.getLong("time");
+                String message = reminder.getString("message");
+                String title = reminder.getString("name");
+                String id = reminder.getString("id");
+                int idHash = id.hashCode();
+
+                Intent intent = new Intent(this, ReminderReceiver.class);
+                intent.putExtra("message", message);
+                intent.putExtra("title", title);
+                intent.putExtra("id", id);
+                intent.putExtra("time", timeStamp);
+                intent.putExtra("patientID", patientID);
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, idHash, new Intent(intent), 0));
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        //alarmManager.cancel(pendingIntent);
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
     }
 
 
@@ -145,4 +210,69 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     }
 
+    /* RESTful API calls background task for getting reminders
+    * Runs in a separate thread than main activity
+    */
+    protected class ReminderRESTful extends AsyncTask<String, Integer, JSONArray> {
+
+        // Executes doInBackground task first
+        @Override
+        protected JSONArray doInBackground(String... params) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpGet request = new HttpGet(patientAPIURL + patientID + "/reminder");
+            HttpResponse response;
+            boolean success = false;
+            JSONArray reminders = null;
+            StringBuilder builder = new StringBuilder();
+
+            try {
+                response = httpClient.execute(request);
+
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    reminders = new JSONArray(jsonString);
+                }
+
+            } catch (Exception e) {
+                success = false;
+            } finally {
+                httpClient.close();
+            }
+
+            if (success) {
+                return reminders;
+            } else {
+                return null;
+            }
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(JSONArray reminders) {
+            super.onPostExecute(reminders);
+
+            // Do something with the JSONArray of reminders here..
+            try {
+                if (reminders != null) {
+                    setAlarms(reminders);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 }

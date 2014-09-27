@@ -21,7 +21,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -222,7 +221,8 @@ public class LoginActivity extends Activity implements
 
             // Move onto the main activity
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            // Pass the current patient id to the main activity
+			
+            // Parse id of current user to main activity before starting
             intent.putExtra("id", id);
             startActivity(intent);
             LoginActivity.this.finish();
