@@ -1,5 +1,5 @@
 <resources>
-        <string name="title_activity_login">Sign In</string>
+    <string name="title_activity_login">Sign In</string>
 
     <!-- Strings related to login -->
     <string name="Title">Dementia Smartwatch</string>

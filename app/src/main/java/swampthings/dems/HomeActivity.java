@@ -3,6 +3,7 @@ package swampthings.dems;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.app.AlarmManager;
@@ -157,6 +158,13 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             // send panic through restful
             new PanicRESTful().execute(location);
+        } else if (v.getId() == R.id.call_carer) {
+            //call carer button pressed
+
+            String url = "tel:123456789";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(url));
+            this.startActivity(intent);
         }
 
     }
