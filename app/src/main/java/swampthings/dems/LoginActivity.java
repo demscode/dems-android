@@ -179,9 +179,10 @@ public class LoginActivity extends Activity implements
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.sign_in_button) {
-        googleApiClient.connect();
+            googleApiClient.connect();
+            signInClicked = true;
+
             if(!googleApiClient.isConnecting() && !googleApiClient.isConnected()) {
-                signInClicked = true;
                 resolveSignInErrors();
             }
         }
