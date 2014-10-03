@@ -322,7 +322,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         protected void onPostExecute(JSONObject contactDetails) {
             super.onPostExecute(contactDetails);
 
-            // Do something with the JSONArray of reminders here..
+            // Store carer contact number
             if (contactDetails != null) {
                 try {
                     carerPhone = contactDetails.getString("contact_number");

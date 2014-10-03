@@ -55,6 +55,10 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
         new UpdateReminderRESTful().execute(reminderInfo);
     }
 
+    public AlertDialog getAlert() {
+        return this.alert;
+    }
+
     protected class UpdateReminderRESTful extends AsyncTask<Bundle, Integer, Boolean>  {
 
         @Override
