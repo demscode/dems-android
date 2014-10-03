@@ -2,11 +2,10 @@
 <resources>
 
     <string name="app_name">DemS</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Dementia Smartwatch</string>
     <string name="PatientID">Patient ID</string>
     <string name="action_settings">Settings</string>
     <string name="panic_button">Panic!</string>
-    <string name="title_activity_notification_receiver">NotificationReceiverActivity</string>
-    <string name="hello_world">Hello World!</string>
+    <string name="call_carer">Call Carer</string>
 
 </resources>

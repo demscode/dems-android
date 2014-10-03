@@ -3,16 +3,16 @@ package swampthings.dems;
 import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -33,6 +33,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected String patientID;
     protected GPS gps;
     protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+    protected String carerPhone = null;
 
     private AlarmManager alarmManager;
     private ReminderReceiver broadcastReceiver;
@@ -69,12 +70,14 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected void onStart() {
         super.onStart();
         findViewById(R.id.panic_button).setOnClickListener(this);
+        findViewById(R.id.call_carer).setOnClickListener(this);
 
         // post the initial location
         if (gps.canGetLocation()) {
             gps.POSTLocation();
         }
 
+        new ContactRESTful().execute();
         new ReminderRESTful().execute();
     }
 
@@ -120,26 +123,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onDestroy();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.panic_button) {
@@ -157,6 +140,17 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             // send panic through restful
             new PanicRESTful().execute(location);
+        } else if (v.getId() == R.id.call_carer) {
+            //call carer button pressed
+
+            if (carerPhone != null) {
+                String url = "tel:" + carerPhone;
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(url));
+                this.startActivity(intent);
+            } else {
+                Toast.makeText(this, "Could not retrieve contact number at this time.", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
@@ -272,6 +266,72 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 e.printStackTrace();
             }
 
+        }
+
+    }
+
+    /* RESTful API calls background task for getting carer contact details
+    * Runs in a separate thread than main activity
+    */
+    protected class ContactRESTful extends AsyncTask<String, Integer, JSONObject> {
+
+        // Executes doInBackground task first
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpGet request = new HttpGet(patientAPIURL + patientID + "/contact");
+            HttpResponse response;
+            boolean success = false;
+            JSONObject contactDetails = null;
+            StringBuilder builder = new StringBuilder();
+
+            try {
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+
+                    HttpEntity entity = response.getEntity();
+                    InputStream content = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        builder.append(line);
+                    }
+
+                    String jsonString = builder.toString();
+
+                    contactDetails = new JSONObject(jsonString);
+                }
+
+            } catch (Exception e) {
+                success = false;
+            } finally {
+                httpClient.close();
+            }
+
+            if (success) {
+                return contactDetails;
+            } else {
+                return null;
+            }
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(JSONObject contactDetails) {
+            super.onPostExecute(contactDetails);
+
+            // Do something with the JSONArray of reminders here..
+            if (contactDetails != null) {
+                try {
+                    carerPhone = contactDetails.getString("contact_number");
+                } catch (Exception e) {
+                    carerPhone = null;
+                }
+            } else {
+                carerPhone = null;
+            }
         }
 
     }
