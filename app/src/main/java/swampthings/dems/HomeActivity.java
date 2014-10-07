@@ -26,6 +26,12 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class HomeActivity extends Activity implements View.OnClickListener {
@@ -34,9 +40,14 @@ public class HomeActivity extends Activity implements View.OnClickListener {
     protected GPS gps;
     protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
     protected String carerPhone = null;
+    protected Date currentUpdate;
 
     private AlarmManager alarmManager;
     private ReminderReceiver broadcastReceiver;
+    private Set<String> reminderHashIDs;
+    private Date lastUpdate;
+
+    private static final long UPDATE_INTERVAL = 1000 * 60 * 30; // 30 minutes
 
 
     @Override
@@ -64,6 +75,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         registerReceiver(broadcastReceiver, new IntentFilter("swampthings.dems"));
         alarmManager = (AlarmManager)(this.getSystemService(Context.ALARM_SERVICE));
 
+        // read set reminder ids & get last update time
+        reminderHashIDs = this.getPreferences(Context.MODE_PRIVATE).getStringSet("swampthings.dems.reminders", new HashSet<String>());
+        long test = this.getPreferences(Context.MODE_PRIVATE).getLong("swampthings.dems.lastUpdate", 0);
+        lastUpdate = new Date();
+        lastUpdate.setTime(test);
     }
 
     @Override
@@ -77,12 +93,29 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             gps.POSTLocation();
         }
 
-        new ContactRESTful().execute();
-        new ReminderRESTful().execute();
+        // set up timer task to handle restful updates
+        SetUpTimerTask();
+
     }
 
+    public void SetUpTimerTask() {
+        Timer timer;
+        TimerTask timerTask;
 
-    public void setAlarms(JSONArray reminders) throws JSONException {
+        timer = new Timer();
+
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                new ContactRESTful().execute();
+                new ReminderRESTful().execute();
+            }
+        };
+
+        timer.scheduleAtFixedRate(timerTask, 0, UPDATE_INTERVAL);
+    }
+
+    public void UpdateReminders(JSONArray reminders) throws JSONException {
         for(int i = 0; i < reminders.length(); i++) {
 
             JSONObject reminder = reminders.getJSONObject(i);
@@ -98,27 +131,105 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             // set reminder if it hasn't already been acknowledged
             if (status == null || status.equals("unknown")) {
 
-                long timeStamp = reminder.getLong("time");
-                String message = reminder.getString("message");
-                String title = reminder.getString("name");
-                String id = reminder.getString("id");
-                int idHash = id.hashCode();
+                String id;
+                try {
+                    id = reminder.getString("id");
+                } catch (JSONException e) {
+                    id = null;
+                }
 
-                Intent intent = new Intent(this, ReminderReceiver.class);
-                intent.putExtra("message", message);
-                intent.putExtra("title", title);
-                intent.putExtra("id", id);
-                intent.putExtra("time", timeStamp);
-                intent.putExtra("patientID", patientID);
+                if (id != null) {
+                    if (!reminderHashIDs.contains(id)) {
+                        //add new reminder
+                        reminderHashIDs.add(id);
+                        SetAlarm(reminder);
+                    } else {
+                        //update existing reminder
+                        long lastModified;
+                        try {
+                            lastModified = reminder.getLong("createdAt");
+                        } catch (JSONException e) {
+                            lastModified = 0;
+                        }
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, idHash, new Intent(intent), 0));
+                        // alarm has been modified since last update
+                        if (lastModified >= lastUpdate.getTime() || lastModified == 0) {
+                            CancelAlarm(id);
+                            SetAlarm(reminder);
+                            reminderHashIDs.add(id);
+                        }
+                    }
+                }
             }
+        }
+
+        //remove alarms for deleted reminders
+        RemoveDeletedAlarms(reminders);
+        lastUpdate = currentUpdate;
+    }
+
+    public void SetAlarm(JSONObject reminder) throws JSONException {
+
+            long timeStamp = reminder.getLong("time");
+            String message = reminder.getString("message");
+            String title = reminder.getString("name");
+            String id = reminder.getString("id");
+            int idHash = id.hashCode();
+
+            Intent intent = new Intent(this, ReminderReceiver.class);
+            intent.putExtra("message", message);
+            intent.putExtra("title", title);
+            intent.putExtra("id", id);
+            intent.putExtra("time", timeStamp);
+            intent.putExtra("patientID", patientID);
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, idHash, new Intent(intent), 0));
+    }
+
+    private void CancelAlarm(String id) {
+        int flag = id.hashCode();
+
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, flag, new Intent(intent), PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent.cancel();
+        alarmManager.cancel(pendingIntent);
+
+        reminderHashIDs.remove(id);
+    }
+
+    private void RemoveDeletedAlarms(JSONArray reminders) {
+        HashSet<String> retrieved = new HashSet<String>();
+        ArrayList<String> toRemove = new ArrayList<String>();
+
+        for (int i = 0; i < reminders.length(); i++) {
+            try {
+                JSONObject reminder = reminders.getJSONObject(i);
+                retrieved.add(reminder.getString("id"));
+            } catch (JSONException e) {
+                continue;
+            }
+        }
+
+        for (String id : reminderHashIDs) {
+            if (!retrieved.contains(id)) {
+                toRemove.add(id);
+            }
+        }
+
+        for (String id: toRemove) {
+            CancelAlarm(id);
+            reminderHashIDs.remove(id);
         }
     }
 
     @Override
     protected void onDestroy() {
-        //alarmManager.cancel(pendingIntent);
+        // save set reminder ids & time of last update
+        this.getPreferences(Context.MODE_PRIVATE).edit()
+                .putStringSet("swampthings.dems.reminders", reminderHashIDs)
+                .putLong("swampthings.dems.lastUpdate", lastUpdate.getTime())
+                .commit();
+
         unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
@@ -154,7 +265,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         }
 
     }
-
 
     /* RESTful API calls background task for panic button
      * Runs in a separate thread than main activity
@@ -218,6 +328,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             boolean success = false;
             JSONArray reminders = null;
             StringBuilder builder = new StringBuilder();
+            currentUpdate = new Date();
 
             try {
                 response = httpClient.execute(request);
@@ -260,7 +371,8 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             // Do something with the JSONArray of reminders here..
             try {
                 if (reminders != null) {
-                    setAlarms(reminders);
+                    //SetAlarm(reminders);
+                    UpdateReminders(reminders);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
