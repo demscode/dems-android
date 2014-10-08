@@ -44,7 +44,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
     private AlarmManager alarmManager;
     private ReminderReceiver broadcastReceiver;
-    private Set<String> reminderHashIDs;
+    private Set<String> reminderIDs;
     private Date lastUpdate;
 
     private static final long UPDATE_INTERVAL = 1000 * 60 * 30; // 30 minutes
@@ -75,11 +75,10 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         registerReceiver(broadcastReceiver, new IntentFilter("swampthings.dems"));
         alarmManager = (AlarmManager)(this.getSystemService(Context.ALARM_SERVICE));
 
-        // read set reminder ids & get last update time
-        reminderHashIDs = this.getPreferences(Context.MODE_PRIVATE).getStringSet("swampthings.dems.reminders", new HashSet<String>());
-        long test = this.getPreferences(Context.MODE_PRIVATE).getLong("swampthings.dems.lastUpdate", 0);
+        // set reminder ids & last update time defaults
+        reminderIDs = new HashSet<String>();
         lastUpdate = new Date();
-        lastUpdate.setTime(test);
+        lastUpdate.setTime(0);
     }
 
     @Override
@@ -139,9 +138,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 }
 
                 if (id != null) {
-                    if (!reminderHashIDs.contains(id)) {
+                    if (!reminderIDs.contains(id)) {
                         //add new reminder
-                        reminderHashIDs.add(id);
+                        reminderIDs.add(id);
                         SetAlarm(reminder);
                     } else {
                         //update existing reminder
@@ -156,7 +155,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                         if (lastModified >= lastUpdate.getTime() || lastModified == 0) {
                             CancelAlarm(id);
                             SetAlarm(reminder);
-                            reminderHashIDs.add(id);
                         }
                     }
                 }
@@ -193,8 +191,6 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, flag, new Intent(intent), PendingIntent.FLAG_UPDATE_CURRENT);
         pendingIntent.cancel();
         alarmManager.cancel(pendingIntent);
-
-        reminderHashIDs.remove(id);
     }
 
     private void RemoveDeletedAlarms(JSONArray reminders) {
@@ -206,11 +202,11 @@ public class HomeActivity extends Activity implements View.OnClickListener {
                 JSONObject reminder = reminders.getJSONObject(i);
                 retrieved.add(reminder.getString("id"));
             } catch (JSONException e) {
-                continue;
+                e.printStackTrace();
             }
         }
 
-        for (String id : reminderHashIDs) {
+        for (String id : reminderIDs) {
             if (!retrieved.contains(id)) {
                 toRemove.add(id);
             }
@@ -218,18 +214,21 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         for (String id: toRemove) {
             CancelAlarm(id);
-            reminderHashIDs.remove(id);
+            reminderIDs.remove(id);
         }
+    }
+
+    public void RemoveAllAlarms() {
+        for (String id: reminderIDs) {
+            CancelAlarm(id);
+        }
+
+        reminderIDs.clear();
     }
 
     @Override
     protected void onDestroy() {
-        // save set reminder ids & time of last update
-        this.getPreferences(Context.MODE_PRIVATE).edit()
-                .putStringSet("swampthings.dems.reminders", reminderHashIDs)
-                .putLong("swampthings.dems.lastUpdate", lastUpdate.getTime())
-                .commit();
-
+        RemoveAllAlarms();
         unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
@@ -264,6 +263,10 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             }
         }
 
+    }
+
+    public Set<String> getReminderIDs() {
+        return reminderIDs;
     }
 
     /* RESTful API calls background task for panic button
