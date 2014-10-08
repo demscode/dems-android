@@ -9,11 +9,17 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import android.text.format.DateFormat;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.Date;
 
 public class ReminderCreationActivity extends Activity implements View.OnClickListener{
 
@@ -24,6 +30,8 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
     protected static int reminderDay;
     protected static TextView time;
     protected static TextView date;
+
+    private final String reminderType = "Patient Created";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +46,13 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
         time = (TextView) findViewById(R.id.reminder_time);
         date = (TextView) findViewById(R.id.reminder_date);
 
-        reminderHour = 0;
-        reminderMinute = 0;
-        time.setText("12:00am");
-
+        // set default time
         final Calendar c = Calendar.getInstance();
+        reminderHour = c.get(Calendar.HOUR_OF_DAY);
+        reminderMinute = c.get(Calendar.MINUTE);
+        time.setText(TimeToString(reminderHour, reminderMinute));
+
+        // set default date
         reminderYear = c.get(Calendar.YEAR);
         reminderMonth = c.get(Calendar.MONTH);
         reminderDay = c.get(Calendar.DAY_OF_MONTH);
@@ -60,9 +70,45 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
             DialogFragment timeFragment = new TimePickerFragment();
             timeFragment.show(getFragmentManager(), "timePicker");
         } else if (v.getId() == R.id.reminder_submit) {
-            System.out.println("HOUR OF DAY = " + reminderHour);
-            System.out.println("MINUTE = " + reminderMinute);
+            Calendar c = Calendar.getInstance();
+            c.clear();
+            c.set(reminderYear, reminderMonth, reminderDay, reminderHour, reminderMinute);
+            Date date = c.getTime();
+            long epochTime = date.getTime();
+
+            EditText nameField = (EditText) findViewById(R.id.reminder_name);
+            String title = nameField.getText().toString();
+
+            EditText messageField = (EditText) findViewById(R.id.reminder_name);
+            String message = messageField.getText().toString();
+
+            JSONObject reminder = new JSONObject();
+            try {
+                reminder.put("name", title);
+                reminder.put("message", message);
+                reminder.put("type", reminderType);
+                reminder.put("time", epochTime);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // API call to create reminder
+
         }
+    }
+
+    public static String TimeToString(int hourOfDay, int minute) {
+        String hour = Integer.toString(hourOfDay % 12);
+        if (hourOfDay % 12 == 0) {
+            hour = "12";
+        }
+
+        String meridiem = "am";
+        if (hourOfDay > 11 && hourOfDay < 24) {
+            meridiem = "pm";
+        }
+
+        return (hour + ":" + String.format("%02d",minute) + meridiem);
     }
 
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
@@ -83,17 +129,7 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
             reminderHour = hourOfDay;
             reminderMinute = minute;
 
-            String hour = Integer.toString(hourOfDay % 12);
-            if (hourOfDay % 12 == 0) {
-                hour = "12";
-            }
-
-            String meridiem = "am";
-            if (hourOfDay > 11 && hourOfDay < 24) {
-                meridiem = "pm";
-            }
-
-            time.setText(hour + ":" + String.format("%02d",minute) + meridiem);
+            time.setText(TimeToString(hourOfDay, minute));
         }
     }
 
