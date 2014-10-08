@@ -59,6 +59,14 @@
                 android:value=".HomeActivity" />
         </activity>
 
+        <activity android:name=".ReminderCreationActivity"
+            android:parentActivityName=".HomeActivity"
+            android:label="Create Reminder" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeActivity" />
+        </activity>
+
     </application>
 
 </manifest>
