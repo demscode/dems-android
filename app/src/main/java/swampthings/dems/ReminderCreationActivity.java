@@ -1,23 +1,25 @@
 package swampthings.dems;
 
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import android.text.format.DateFormat;
-
+import android.widget.Toast;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -31,12 +33,17 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
     protected static TextView time;
     protected static TextView date;
 
+
     private final String reminderType = "Patient Created";
+    protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+    protected String patientID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_creation);
+
+        patientID = savedInstanceState.getString("patientID");
 
         findViewById(R.id.reminder_cancel).setOnClickListener(this);
         findViewById(R.id.reminder_submit).setOnClickListener(this);
@@ -57,6 +64,7 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
         reminderMonth = c.get(Calendar.MONTH);
         reminderDay = c.get(Calendar.DAY_OF_MONTH);
         date.setText(reminderDay + "/" + reminderMonth + "/" + reminderYear);
+
     }
 
     @Override
@@ -93,7 +101,7 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
             }
 
             // API call to create reminder
-
+            new CreateNewReminder().execute(reminder);
         }
     }
 
@@ -155,6 +163,57 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
             reminderDay = dayOfMonth;
 
             date.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+        }
+    }
+
+
+    /* RESTful API calls background task
+     * Runs in a separate thread than main activity
+     */
+    protected class CreateNewReminder extends AsyncTask<JSONObject, Integer, Boolean> {
+
+        // Executes doInBackground task first
+        @Override
+        protected Boolean doInBackground(JSONObject... params) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpPost request = new HttpPost(patientAPIURL + patientID + "/reminder");
+            HttpResponse response;
+            boolean success = false;
+            JSONObject reminder = params[0];
+
+            try {
+
+                StringEntity stringEntity = new StringEntity(reminder.toString());
+
+                request.setEntity(stringEntity);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+                }
+
+            } catch (Exception e) {
+                success = false;
+            } finally {
+                httpClient.close();
+            }
+
+            return success;
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
+
+            if (success) {
+                ReminderCreationActivity.this.finish();
+            } else {
+                Toast.makeText(ReminderCreationActivity.this, "Could not create the new reminder.", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
