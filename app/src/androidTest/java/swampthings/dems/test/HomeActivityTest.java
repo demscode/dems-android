@@ -36,7 +36,7 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
         reminder1.put("name", "reminder1");
         reminder1.put("message", "test message");
         reminder1.put("time", (long)1234);
-        reminder1.put("status", "unknown");
+        reminder1.put("acknowledgement", "none");
         reminder1.put("createdAt", (long)0);
 
         reminder2 = new JSONObject();
@@ -44,7 +44,7 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
         reminder2.put("name", "reminder1");
         reminder2.put("message", "test message");
         reminder2.put("time", (long)4567);
-        reminder2.put("status", "unknown");
+        reminder2.put("acknowledgement", "none");
         reminder2.put("createdAt", (long)0);
 
         reminders = new JSONArray();

@@ -49,7 +49,7 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
         dialog.dismiss();
 
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            reminderInfo.putString("status", "OK");
+            reminderInfo.putString("acknowledgement", "OK");
         }
 
         new UpdateReminderRESTful().execute(reminderInfo);
@@ -72,7 +72,7 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
             try {
                 JSONObject reminderUpdate = new JSONObject();
 
-                reminderUpdate.put("status", bundle.getString("status"));
+                reminderUpdate.put("acknowledgement", bundle.getString("acknowledgement"));
 
                 StringEntity stringEntity = new StringEntity(reminderUpdate.toString());
 

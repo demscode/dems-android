@@ -119,16 +119,16 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
             JSONObject reminder = reminders.getJSONObject(i);
 
-            // get status of reminder
-            String status;
+            // get acknowledgement status of reminder
+            String acknowledgement;
             try {
-                status = reminder.getString("status");
+                acknowledgement = reminder.getString("acknowledgement");
             } catch (JSONException e) {
-                status = null;
+                acknowledgement = null;
             }
 
             // set reminder if it hasn't already been acknowledged
-            if (status == null || status.equals("unknown")) {
+            if (acknowledgement == null || acknowledgement.equals("none")) {
 
                 String id;
                 try {
