@@ -44,7 +44,8 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
         setContentView(R.layout.activity_reminder_creation);
 
         try {
-            patientID = savedInstanceState.getString("patientID");
+            Bundle extras = getIntent().getExtras();
+            patientID = extras.getString("patientID");
         } catch (NullPointerException e) {
             patientID = null;
         }
@@ -91,7 +92,7 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
             EditText nameField = (EditText) findViewById(R.id.reminder_name);
             String title = nameField.getText().toString();
 
-            EditText messageField = (EditText) findViewById(R.id.reminder_name);
+            EditText messageField = (EditText) findViewById(R.id.reminder_message);
             String message = messageField.getText().toString();
 
             JSONObject reminder = new JSONObject();
