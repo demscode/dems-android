@@ -43,7 +43,11 @@ public class ReminderCreationActivity extends Activity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminder_creation);
 
-        patientID = savedInstanceState.getString("patientID");
+        try {
+            patientID = savedInstanceState.getString("patientID");
+        } catch (NullPointerException e) {
+            patientID = null;
+        }
 
         findViewById(R.id.reminder_cancel).setOnClickListener(this);
         findViewById(R.id.reminder_submit).setOnClickListener(this);

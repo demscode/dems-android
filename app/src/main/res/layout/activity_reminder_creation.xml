@@ -16,12 +16,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ReminderName"
-            android:textSize="24dp"/>
+            android:textSize="24sp"/>
 
         <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:inputType="text"
             android:id="@+id/reminder_name" />
     </LinearLayout>
 
@@ -36,7 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/ReminderMessage"
-            android:textSize="24dp"/>
+            android:textSize="24sp"/>
 
         <EditText
             android:layout_width="fill_parent"
@@ -44,7 +45,7 @@
             android:minLines="1"
             android:maxLines="5"
             android:inputType="textMultiLine"
-            android:gravity="left|top"
+            android:gravity="start|top"
             android:id="@+id/reminder_message" />
 
     </LinearLayout>
@@ -60,13 +61,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Date"
-            android:textSize="24dp"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="12dp"
-            android:textSize="20dp"
+            android:padding="12dp"
+            android:textSize="20sp"
             android:id="@+id/reminder_date" />
     </LinearLayout>
 
@@ -80,13 +81,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Time"
-            android:textSize="24dp"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="12dp"
-            android:textSize="20dp"
+            android:padding="12dp"
+            android:textSize="20sp"
             android:id="@+id/reminder_time" />
     </LinearLayout>
 
@@ -95,18 +96,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
-        android:paddingTop="16dp">
+        android:padding="16dp">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
+            android:text="@string/CancelButton"
             android:id="@+id/reminder_cancel" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Submit"
+            android:text="@string/SubmitButton"
             android:id="@+id/reminder_submit" />
     </LinearLayout>
 
