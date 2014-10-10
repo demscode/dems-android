@@ -86,6 +86,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         super.onStart();
         findViewById(R.id.panic_button).setOnClickListener(this);
         findViewById(R.id.call_carer).setOnClickListener(this);
+        findViewById(R.id.create_reminder).setOnClickListener(this);
 
         // post the initial location
         if (gps.canGetLocation()) {
@@ -261,6 +262,10 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             } else {
                 Toast.makeText(this, "Could not retrieve contact number at this time.", Toast.LENGTH_LONG).show();
             }
+        } else if (v.getId() == R.id.create_reminder) {
+            Intent intent = new Intent(this, ReminderCreationActivity.class);
+            intent.putExtra("patientID", patientID);
+            startActivity(intent);
         }
 
     }

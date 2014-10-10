@@ -14,6 +14,7 @@ public class Runner extends InstrumentationTestRunner {
         suite.addTestSuite(HomeActivityTest.class);
         suite.addTestSuite(LoginActivityTest.class);
         suite.addTestSuite(ReminderDisplayActivityTest.class);
+        suite.addTestSuite(ReminderCreationActivityTest.class);
         return suite;
     }
 

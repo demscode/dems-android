@@ -33,12 +33,14 @@ public class ReminderDisplayActivityTest extends ActivityInstrumentationTestCase
     public void testAlertNotNull() {
         AlertDialog alert = activity.getAlert();
         assertNotNull("Alert is null.", alert);
+        alert.dismiss();
     }
 
     @SmallTest
     public void testAlertIsShown() {
         AlertDialog alert = activity.getAlert();
         assertTrue("Alert not displayed.", alert.isShowing());
+        alert.dismiss();
     }
 
     @UiThreadTest
