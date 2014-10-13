@@ -256,6 +256,9 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         } else if (v.getId() == R.id.call_carer) {
             //call carer button pressed
 
+            // log button press on server side
+            new CreateCallCarerActivity().execute();
+
             if (carerPhone != null) {
                 String url = "tel:" + carerPhone;
                 Intent intent = new Intent(Intent.ACTION_CALL);
@@ -456,5 +459,54 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             }
         }
 
+    }
+
+
+    /* RESTful API calls background task
+     * Runs in a separate thread than main activity
+     */
+    protected class CreateCallCarerActivity extends AsyncTask<JSONObject, Integer, Boolean> {
+
+        // Executes doInBackground task first
+        @Override
+        protected Boolean doInBackground(JSONObject... params) {
+            AndroidHttpClient httpClient = AndroidHttpClient.newInstance("Android");
+            HttpPost request = new HttpPost(patientAPIURL + patientID + "/activity");
+            HttpResponse response;
+            boolean success = false;
+            StringBuilder builder = new StringBuilder();
+
+            try {
+
+                JSONObject activity = new JSONObject();
+                activity.put("type", 3);
+                activity.put("description", "Call Carer button pressed.");
+
+                StringEntity stringEntity = new StringEntity(activity.toString());
+
+                request.setEntity(stringEntity);
+                request.setHeader("Accept", "application/json");
+                request.setHeader("Content-type", "application/json");
+
+                response = httpClient.execute(request);
+
+                if (response.getStatusLine().getStatusCode() == 200) {
+                    success = true;
+                }
+
+            } catch (Exception e) {
+                success =  false;
+            } finally {
+                httpClient.close();
+            }
+
+            return success;
+        }
+
+        // Tasks result of doInBackground and executes after completion of task
+        @Override
+        protected void onPostExecute(Boolean success) {
+            super.onPostExecute(success);
+        }
     }
 }
