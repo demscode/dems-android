@@ -25,6 +25,7 @@ public class ReminderDisplayActivityTest extends ActivityInstrumentationTestCase
         Intent intent = new Intent();
         intent.putExtra("title", "Reminder Title");
         intent.putExtra("message", "Reminder Message");
+        intent.putExtra("level", 0);
         setActivityIntent(intent);
         activity = getActivity();
     }
