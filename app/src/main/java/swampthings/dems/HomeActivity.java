@@ -173,6 +173,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             String message = reminder.getString("message");
             String title = reminder.getString("name");
             String id = reminder.getString("id");
+            int level = reminder.getInt("level");
             int idHash = id.hashCode();
 
             Intent intent = new Intent(this, ReminderReceiver.class);
@@ -181,6 +182,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
             intent.putExtra("id", id);
             intent.putExtra("time", timeStamp);
             intent.putExtra("patientID", patientID);
+            intent.putExtra("level", level);
 
             alarmManager.set(AlarmManager.RTC_WAKEUP, timeStamp, PendingIntent.getBroadcast(this, idHash, new Intent(intent), 0));
     }
