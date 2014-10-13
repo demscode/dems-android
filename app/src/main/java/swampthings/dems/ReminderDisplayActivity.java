@@ -17,11 +17,13 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
     private AlertDialog alert;
     private Bundle reminderInfo;
     protected String patientAPIURL = "http://demsweb.herokuapp.com/api/patient/";
+    private int level;
 
     @Override
     protected void onStart() {
         super.onStart();
         reminderInfo = getIntent().getExtras();
+        level = reminderInfo.getInt("level");
 
         DisplayReminder(reminderInfo);
     }
@@ -35,12 +37,27 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
     }
 
     private void DisplayReminder(Bundle details) {
-        alert = new AlertDialog.Builder(this)
-                .setTitle(details.getString("title"))
-                .setMessage(details.getString("message"))
-                .setPositiveButton("OK", this)
-                .create();
-
+        if (level == 1) {
+            alert = new AlertDialog.Builder(this)
+                    .setTitle(details.getString("title"))
+                    .setMessage(details.getString("message"))
+                    .setPositiveButton("Yes", this)
+                    .setNegativeButton("No", this)
+                    .create();
+        } else if (level == 2) {
+            alert = new AlertDialog.Builder(this)
+                    .setTitle(details.getString("title"))
+                    .setMessage(details.getString("message"))
+                    .setPositiveButton("Done", this)
+                    .setNegativeButton("Not Done", this)
+                    .create();
+        } else {
+            alert = new AlertDialog.Builder(this)
+                    .setTitle(details.getString("title"))
+                    .setMessage(details.getString("message"))
+                    .setPositiveButton("OK", this)
+                    .create();
+        }
         alert.show();
     }
 
@@ -48,8 +65,22 @@ public class ReminderDisplayActivity extends Activity implements DialogInterface
     public void onClick(DialogInterface dialog, int which) {
         dialog.dismiss();
 
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            reminderInfo.putString("acknowledgement", "OK");
+        if (level == 1) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                reminderInfo.putString("acknowledgement", "Yes");
+            } else {
+                reminderInfo.putString("acknowledgement", "No");
+            }
+        } else if (level == 2) {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                reminderInfo.putString("acknowledgement", "Done");
+            } else {
+                reminderInfo.putString("acknowledgement", "Not Done");
+            }
+        } else {
+            if (which == DialogInterface.BUTTON_POSITIVE) {
+                reminderInfo.putString("acknowledgement", "OK");
+            }
         }
 
         new UpdateReminderRESTful().execute(reminderInfo);
